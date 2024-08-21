@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Utvalgssortering {
 	
-	public static <T extends Comparable<? super T>> void sorter(List<T> liste) {
+	public static <T extends Comparable<? super T>> void sorter(List<T> liste, Sammenligner s) {
 		
 		int n = liste.size(); // antall elementer i listen
 		
@@ -15,7 +15,7 @@ public class Utvalgssortering {
 			for (int j = i + 1; j < n; j++) {
 				T aktuell = liste.get(j);
 				
-				if (aktuell.compareTo(min) < 0) { // spør om aktuell < min
+				if (s.sammenlign(aktuell, min) < 0) { // spør om aktuell < min
 					min = aktuell;
 					minIndeks = j;
 				}
