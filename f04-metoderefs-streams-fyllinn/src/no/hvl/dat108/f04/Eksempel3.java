@@ -17,8 +17,7 @@ import java.util.function.Function;
  */
 public class Eksempel3 {
 
-	public static void main(String[] args) {
-		
+	public static void main(String[] args) {		
 		//1 - Sortering på etternavn ved å gi inn en Comparator som 2. parameter
 		Collections.sort(people, (a,b) -> a.lastName().compareTo(b.lastName()));
 		
@@ -31,7 +30,6 @@ public class Eksempel3 {
 		//4 - Hvordan virker egentlig Comparator.comparing()?
 		//		Kan vi forstå litt mer ved å lage en slik metode selv?
 		
-//		Collections.sort(people, vedAaSammenligne(Person::age));
 		Collections.sort(people, vedAaSammenligne(Person::firstName));
 		people.forEach(System.out::println);
 	}
@@ -40,8 +38,8 @@ public class Eksempel3 {
 	 * Vår egen utgave av Comparator.comparing(...).
 	 * Sjekk gjerne ut API-doc til Comparator.comparing(), og se om det ligner.
 	 */
-	static ??? vedAaSammenligne(???) {
-		return ???;
+	static <T, U extends Comparable<? super U>> Comparator<T> vedAaSammenligne(Function<T, U> funksjon) {
+		return (a, b) -> funksjon.apply(a).compareTo(funksjon.apply(b));
 	}
 
 }

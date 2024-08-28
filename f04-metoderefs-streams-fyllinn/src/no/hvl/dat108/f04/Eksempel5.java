@@ -4,6 +4,7 @@ import static no.hvl.dat108.f04.People.people;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /*
  * Eksempel4
@@ -18,15 +19,18 @@ public class Eksempel5 {
 		//2 - Lage en liste av etternavnene til de som er over 50 år
 		
 		//Gamlemåten:		
-		List<String> etternavnene = new ArrayList<>();
-		for(Person p : people) {
-			if (p.age() > 50) {
-				etternavnene.add(p.lastName());
-			}
-		}
-		System.out.println(etternavnene);
+//		List<String> etternavnene = new ArrayList<>();
+//		for(Person p : people) {
+//			if (p.age() > 50) {
+//				etternavnene.add(p.lastName());
+//			}
+//		}
+//		System.out.println(etternavnene);
 		
 		//Med streams (ligner på SQL?):		
+		List<String> nyListe = people.stream().filter(p -> p.age() > 50).map(Person::lastName).toList();
+		
+		nyListe.forEach(System.out::println);
 	}
 }
 

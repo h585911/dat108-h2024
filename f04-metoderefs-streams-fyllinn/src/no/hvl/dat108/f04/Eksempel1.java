@@ -17,11 +17,14 @@ import java.util.function.Function;
  */
 public class Eksempel1 {
 	
-	public static List<String> tilListeAvString(List<Person> liste, ???) {
+	public static List<String> tilListeAvString(List<Person> liste, Function<Person, String> funksjon) {
 		
 		List<String> resultat = new ArrayList<>();
 		
-		??? 
+		for (Person p : liste) {
+			String fornavn = funksjon.apply(p);
+			resultat.add(fornavn);
+		}
 				
 		return resultat;
 	}
@@ -29,7 +32,7 @@ public class Eksempel1 {
 	public static void main(String[] args) {
 		
 		//Vi kan prøve å lage en liste av fornavnene til personene i listen
-		List<String> fornavnene = tilListeAvString(people, ???);
+		List<String> fornavnene = tilListeAvString(people, p -> p.firstName());
 		System.out.println(fornavnene);		
 	}
 }

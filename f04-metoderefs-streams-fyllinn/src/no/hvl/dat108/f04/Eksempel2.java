@@ -22,41 +22,41 @@ public class Eksempel2 {
 	}
 	
 	// Meningsløs metode som kun er ment for å øve på funksjoner og metodereferanser
-	private static void gjorNoeMedPerson(Person person, ???) {
-		???.accept(person);
+	private static void gjorNoeMedPerson(Person person, Consumer<Person> con) {
+		con.accept(person);
 	}
 	
 	// Meningsløs metode som kun er ment for å øve på funksjoner og metodereferanser
-	private static String personTilString(Person person, ???) {
-		return ???.apply(person);
+	private static String personTilString(Person person, Function<Person, String> fun) {
+		return fun.apply(person);
 	}
 	
 	// Meningsløs metode som kun er ment for å øve på funksjoner og metodereferanser
-	private static double brukeBiFunc(Double a, Double b, ???) {
-		return ???.apply(a, b);
+	private static double brukeBiFunc(Double a, Double b, BinaryOperator<Double> binOp) {
+		return binOp.apply(a, b);
 	}
 	
 	public static void main(String[] args) {
 		
 		Person arne = new Person("Arne", "And", 1990);
 		
-		gjorNoeMedPerson(arne, p -> System.out.println(p));
+		gjorNoeMedPerson(arne, System.out::print);
 		
-		String fornavn = personTilString(arne, p -> p.firstName());
+		String fornavn = personTilString(arne, Person::firstName);
 		System.out.println(fornavn);
 		
-		String initialer = personTilString(arne, p -> initialer(p));
+		String initialer = personTilString(arne, Eksempel2::initialer);
 		System.out.println(initialer);
 		
-		double maks = brukeBiFunc(4.0, 5.0, (a,b) -> Math.max(a, b));
+		double maks = brukeBiFunc(4.0, 5.0, Math::max);
 		System.out.println(maks);
 		
-		double snitt = brukeBiFunc(2.0, 5.0, (a,b) -> snitt(a, b));
+		double snitt = brukeBiFunc(2.0, 5.0, Eksempel2::snitt);
 		System.out.println(snitt);
 		
-		people.sort((p1,p2) -> p1.compareTo(p2));
+		people.sort(Person::compareTo);
 		
-		people.forEach(p -> System.out.println(p));
+		people.forEach(System.out::println);
 		
 	}
 }
